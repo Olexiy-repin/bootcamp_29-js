@@ -137,7 +137,3 @@
 //    */
 //   getTransactionTotal(type) {},
 // };
-
-eatPizza = pizzaName => console.log(`Eating pizza ${pizzaName}.`);
-
-makePizza('Ultracheese', pizzaName => console.log(`Eating pizza ${pizzaName}.`));
