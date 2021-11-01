@@ -65,7 +65,6 @@
 // console.log('source obj:', user);
 // console.log('copy obj:', copy);
 
-/*
 const obj = {
   a: 1,
   b: 2,
@@ -80,23 +79,39 @@ const obj = {
   k: [5, 4, 3, 2],
 };
 
-const deepSpread = function (obj) {
-  const copyObj = { ...obj };
-  const keys = Object.keys(copyObj);
+const deepSpread = function (target) {
+  if (Array.isArray(target)) {
+    const copy = [...target];
+
+    copy.forEach((elem, idx, arr) => {
+      if (elem === Object(elem)) {
+        if (Array.isArray(elem)) {
+          arr[idx] = [...elem];
+        } else {
+          arr[idx] = deepSpread(elem);
+        }
+      }
+    });
+
+    return copy;
+  }
+
+  const copy = { ...target };
+  const keys = Object.keys(copy);
 
   for (let key of keys) {
-    if (copyObj[key] === Object(copyObj[key])) {
-      if (typeof copyObj[key] === 'function') {
-        copyObj[key].bind(copyObj);
-      } else if (Array.isArray(copyObj[key])) {
-        copyObj[key] = [...copyObj[key]];
+    if (copy[key] === Object(copy[key])) {
+      if (typeof copy[key] === 'function') {
+        copy[key].bind(copy);
+      } else if (Array.isArray(copy[key])) {
+        copy[key] = [...copy[key]];
       } else {
-        copyObj[key] = deepSpread(copyObj[key]);
+        copy[key] = deepSpread(copy[key]);
       }
     }
   }
 
-  return copyObj;
+  return copy;
 };
 
 const newObj = deepSpread(obj);
@@ -109,8 +124,6 @@ newObj.c.y();
 
 console.log('source obj:', obj);
 console.log('copy obj', newObj);
-
-*/
 
 /* ============ Операция rest ============ */
 // Напишите функцию summ, которая сумирует произвольное количество аргументов
