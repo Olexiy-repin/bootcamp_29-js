@@ -8,10 +8,14 @@
 //   console.log('Hello!');
 // };
 
-//? call and apply
+// welcome.test = 5;
 
-// const showFullName = function () {
-//   console.log(`${this.firstName} ${this.lastName}`);
+// console.dir(welcome);
+
+//? call and apply
+// const showFullName = function (arr, message) {
+//   console.log(arr);
+//   console.log(`${message} ${this.firstName} ${this.lastName}`);
 // };
 
 // const user = {
@@ -20,20 +24,26 @@
 //   age: 30,
 // };
 
+// showFullName.call(user, [1, 2, 3], 'Hello');
+
 // const anotherUser = {
 //   firstName: 'Ray',
 //   lastName: 'Fleming',
 //   age: 40,
 // };
 
+// showFullName.apply(anotherUser, ['Hello']);
+
 // Одалживание метода
-// const createCurrentDate = function (...args) {
-//   return args.join('.');
+// const createCurrentDate = function () {
+//   return [].join.call(arguments, '.');
 // };
+
 // console.log(createCurrentDate(10, 10, 21));
 
 //? bind
 // const showFullName = function () {
+//   console.log(this);
 //   console.log(`${this.firstName} ${this.lastName}`);
 // };
 
@@ -43,18 +53,42 @@
 //   age: 30,
 // };
 
+// const showUserFullName = showFullName.bind(user);
+// showUserFullName();
+
 // const anotherUser = {
 //   firstName: 'Ray',
 //   lastName: 'Fleming',
 //   age: 40,
 // };
 
+// const showAnotherUserFullName = showFullName.bind(anotherUser);
+// showAnotherUserFullName();
+
+// const user = {
+//   name: 'Luis',
+//   age: 30,
+
+//   showThis() {
+//     console.log(`this ---->`, this);
+//   },
+
+//   showName() {
+//     console.log(`this name is: ${this.name}`);
+//   },
+// };
+
+// const someFunction = function (callback) {
+//   // callback = user.showThis
+//   //   console.log(callback);
+//   callback();
+// };
+
+// someFunction(user.showName.bind(user));
+
 //? TASK 01
-// Что выведет функция?
 
-// Можем ли мы изменить this дополнительным связыванием?
 // Что выведет этот код?
-
 // const f = function () {
 //   console.log(this.name);
 // };
@@ -77,7 +111,7 @@
 //   }
 // };
 
-// let user = {
+// const user = {
 //   name: 'Вася',
 
 //   loginOk() {
@@ -89,7 +123,7 @@
 //   },
 // };
 
-// checkPassword(user.loginOk, user.loginFail);
+// checkPassword(user.loginOk.bind(user), user.loginFail.bind(user));
 
 //? TASK 03
 // Исправьте функцию, теряющую "this".

@@ -24,21 +24,30 @@
 //   },
 // };
 
+// user.whatIsThis();
+// user.showName();
+
 // Расмотрим как this ведёт себя в обычных функциях (строгий, не строгий режим)
 //? Function expression
 // const fn = function () {
-//   console.log(`this ----> ${this}`);
+//   console.log(`this ---->`, this);
 // };
+
+// fn();
 
 //? Function declaration
 // function fn() {
-//   console.log(`this ----> ${this}`);
+//   console.log(`this ---->`, this);
 // }
+
+// fn();
 
 //? Arrow function
 // const fn = () => {
-//   console.log(`this ----> ${this}`);
+//   console.log(`this ---->`, this);
 // };
+
+// fn();
 
 // Присвоение функции как метода объекта
 // const user = {
@@ -52,12 +61,24 @@
 // };
 
 // const showThis = function () {
-//   console.log(`this ----> ${this}`);
+//   console.log(`this ---->`, this);
 // };
 
 // const showThisName = function () {
 //   console.log(`this name is: ${this.name}`);
 // };
+
+// user.showThis = showThis;
+// user.showThisName = showThisName;
+
+// user.showThis();
+// user.showThisName();
+
+// anotherUser.showThis = showThis;
+// anotherUser.showThisName = showThisName;
+
+// anotherUser.showThis();
+// anotherUser.showThisName();
 
 // Вызов метода объекта без контекста
 // const user = {
@@ -65,7 +86,7 @@
 //   age: 30,
 
 //   showThis() {
-//     console.log(`this ----> ${this}`);
+//     console.log(`this ---->`, this);
 //   },
 
 //   showName() {
@@ -75,6 +96,7 @@
 
 // const showUserThis = user.showThis;
 // const showUserName = user.showName;
+
 // showUserThis();
 // showUserName();
 
@@ -84,7 +106,7 @@
 //   age: 30,
 
 //   showThis() {
-//     console.log(`this ----> ${this}`);
+//     console.log(`this ---->`, this);
 //   },
 
 //   showName() {
@@ -93,9 +115,12 @@
 // };
 
 // const someFunction = function (callback) {
-//   console.log(callback);
+//   // callback = user.showThis
+//   //   console.log(callback);
 //   callback();
 // };
+
+// someFunction(user.showThis);
 
 // This в стрелочных функциях. Стрелочные функции не имеют своего this, this в стрелках всегда ссылается на родительский this.
 // const user = {
@@ -103,20 +128,22 @@
 //   age: 30,
 
 //   changeAge: newAge => {
-//     console.log(`this ----> ${this}`);
-//     this.age = newAge;
+//     console.log(`this ---->`, this);
+//     // this.age = newAge;
 //   },
 // };
+
+// user.changeAge();
 
 // const user = {
 //   name: 'Luis',
 //   age: 30,
 
 //   changeAge(newAge) {
-//     console.log(`this ----> ${this}`);
+//     console.log(`this ---->`, this);
 
 //     const someFn = () => {
-//       console.log(`this ----> ${this}`);
+//       console.log(`this ---->`, this);
 //       this.age = newAge;
 //     };
 
@@ -124,11 +151,14 @@
 //   },
 // };
 
+// user.changeAge();
+
 //? TASK 01
 // Каким будет результат выполнения этого кода?
 // let user = {
 //   name: 'Джон',
-//   go: function () {
+//   go() {
+//     console.log(this);
 //     console.log(this.name);
 //   },
 // };
@@ -174,14 +204,17 @@
 
 //   up() {
 //     this.step += 1;
+//     return this;
 //   },
 
 //   down() {
 //     this.step -= 1;
+//     return this;
 //   },
 
 //   showStep() {
 //     console.log(this.step);
+//     return this;
 //   },
 // };
 

@@ -10,7 +10,15 @@
 //     { name: 'Sapphire', price: 1400, quantity: 7 },
 //     { name: 'Ruby', price: 800, quantity: 2 },
 //   ],
-//   calcTotalPrice(stoneName) {},
+//   calcTotalPrice(stoneName) {
+//     const currentStone = this.stones.find(stone => stone.name === stoneName);
+
+//     if (currentStone !== undefined) {
+//       return currentStone.price * currentStone.quantity;
+//     }
+
+//     return 'Такой камень не найден';
+//   },
 // };
 
 // console.log(chopShop.calcTotalPrice('Emerald')); // 5200
@@ -20,7 +28,6 @@
 
 //? TASK 02
 // Выполните рефакторинг методов объекта phonebook чтобы код заработал.
-
 // const phonebook = {
 //   contacts: [],
 
@@ -28,14 +35,14 @@
 //     const newContact = {
 //       list: 'default',
 //       ...contact,
-//       id: generateId(),
-//       createdAt: getDate(),
+//       id: this.generateId(),
+//       createdAt: this.getDate(),
 //     };
-//     contacts.push(newContact);
+//     this.contacts.push(newContact);
 //   },
 
 //   getContacts() {
-//     return contacts;
+//     return this.contacts;
 //   },
 
 //   generateId() {
@@ -68,9 +75,21 @@
 // mult() - перемножает сохранённые значения и возвращает результат.
 
 // const calculator = {
-//   read(a, b) {},
-//   add() {},
-//   mult() {},
+//   a: 0,
+//   b: 0,
+
+//   read(a, b) {
+//     this.a = a;
+//     this.b = b;
+//   },
+
+//   add() {
+//     return this.a + this.b;
+//   },
+
+//   mult() {
+//     return this.a * this.b;
+//   },
 // };
 
 // calculator.read(20, 30);
