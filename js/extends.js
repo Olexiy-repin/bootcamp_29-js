@@ -3,16 +3,25 @@
  * Наследование с extends и super
  */
 
-class Manager {
-  constructor({ firstName, lastName, age, numberOfSales } = {}) {
+class User {
+  constructor({ firstName, lastName, age } = {}) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
-    this.numberOfSales = numberOfSales;
   }
 
   getFullName() {
     return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+class Manager extends User {
+  static test = 'my test';
+  #email = 'test@gmail.com';
+
+  constructor({ numberOfSales, ...otherProps } = {}) {
+    super(otherProps);
+    this.numberOfSales = numberOfSales;
   }
 
   doManagerWork() {
@@ -20,16 +29,10 @@ class Manager {
   }
 }
 
-class Developer {
-  constructor({ firstName, lastName, age, completedProjects } = {}) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
+class Developer extends User {
+  constructor({ completedProjects, ...otherProps } = {}) {
+    super(otherProps);
     this.completedProjects = completedProjects;
-  }
-
-  getFullName() {
-    return `${this.firstName} ${this.lastName}`;
   }
 
   doDeveloperWork() {
