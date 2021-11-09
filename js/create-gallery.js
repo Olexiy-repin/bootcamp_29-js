@@ -1,90 +1,75 @@
 'use strict';
-// const pictures = [
-//   {
-//     width: 280,
-//     height: 186,
-//     url: 'https://picsum.photos/id/0/280/186',
-//     alt: 'laptop',
-//   },
-//   {
-//     width: 280,
-//     height: 186,
-//     url: 'https://picsum.photos/id/1/280/186',
-//     alt: 'developer',
-//   },
-//   {
-//     width: 280,
-//     height: 186,
-//     url: 'https://picsum.photos/id/10/280/186',
-//     alt: 'forest',
-//   },
-//   {
-//     width: 280,
-//     height: 186,
-//     url: 'https://picsum.photos/id/100/280/186',
-//     alt: 'beach',
-//   },
-//   {
-//     width: 280,
-//     height: 186,
-//     url: 'https://picsum.photos/id/1000/280/186',
-//     alt: 'mountain',
-//   },
-// ];
-// const containerEl = document.querySelector('.container');
-// const galleryEL = document.querySelector('.gallery');
+const pictures = [
+  {
+    width: 700,
+    height: 460,
+    url: 'https://picsum.photos/id/0/700/460',
+    alt: 'laptop',
+  },
+  {
+    width: 700,
+    height: 460,
+    url: 'https://picsum.photos/id/1/700/460',
+    alt: 'developer',
+  },
+  {
+    width: 700,
+    height: 460,
+    url: 'https://picsum.photos/id/10/700/460',
+    alt: 'forest',
+  },
+  {
+    width: 700,
+    height: 460,
+    url: 'https://picsum.photos/id/100/700/460',
+    alt: 'beach',
+  },
+  {
+    width: 700,
+    height: 460,
+    url: 'https://picsum.photos/id/1000/700/460',
+    alt: 'mountain',
+  },
+];
 
-// Создание Заголовка
+// const galleryEL = document.querySelector('.js-gallery');
 
-// Создание li
+/*
+<li class="gallery-item">
+  <a href="#">
+    <img src="https://picsum.photos/id/237/200/300" alt="Labrador">
+  </a>
+</li>
+*/
 
-// Создание a
+const galleryListEl = document.querySelector('.js-gallery');
 
-// Создание img
+// Функция для создание карточки makeGalleryCard(cardInfo)
+const makeGalleryCard = function ({ width, height, url, alt } = {}) {
+  // Создание li
+  const galleryItemEl = document.createElement('li');
+  galleryItemEl.classList.add('gallery-item');
 
-// Вставка элементов
+  // Создание a
+  const galleryLinkEl = document.createElement('a');
+  galleryLinkEl.href = '#';
 
-// Создание галереи через цикл for
+  galleryItemEl.append(galleryLinkEl);
 
-// Создание галереи через map
+  // Создание img
+  const galleryImgEl = document.createElement('img');
+  galleryImgEl.src = url;
+  galleryImgEl.alt = alt;
+  galleryImgEl.width = width;
+  galleryImgEl.height = height;
 
-class Counter {
-  constructor(initialValue) {
-    this.counterValue = initialValue;
-  }
+  galleryLinkEl.append(galleryImgEl);
 
-  increaseCounter(e) {
-    e.preventDefault();
-    counter.counterValue += 1;
-    refs.initialValue.textContent = counter.counterValue;
-  }
-
-  decreaseCounter(e) {
-    e.preventDefault();
-    counter.counterValue -= 1;
-    refs.initialValue.textContent = counter.counterValue;
-  }
-}
-
-const refs = {
-  incBtn: document.querySelector('[data-action="increment"]'),
-  decBtn: document.querySelector('[data-action="decrement"]'),
-  initialValue: document.querySelector('#value'),
+  return galleryItemEl;
 };
 
-const counter = {
-  counterValue: 0,
-  increaseCounter(e) {
-    e.preventDefault();
-    counter.counterValue += 1;
-    refs.initialValue.textContent = counter.counterValue;
-  },
-  decreaseCounter(e) {
-    e.preventDefault();
-    counter.counterValue -= 1;
-    refs.initialValue.textContent = counter.counterValue;
-  },
-};
+// Перебор коллекции карточек через map
+const galleryItemElements = pictures.map(makeGalleryCard);
 
-refs.incBtn.addEventListener('click', counter.increaseCounter);
-refs.decBtn.addEventListener('click', counter.decreaseCounter);
+// Вставка коллекции карточек на страницу
+galleryListEl.append(...galleryItemElements);
