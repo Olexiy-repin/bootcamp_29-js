@@ -1,1 +1,5 @@
-# bootcamp_29-js
+# Занятие 17:
+
+- Асинхронность
+- Таймеры: setTimeout и setInterval
+- Дата и время
