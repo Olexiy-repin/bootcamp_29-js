@@ -171,3 +171,53 @@
 //   .catch(error => {
 //     console.log(error); //error
 //   });
+
+// new Promise((resolve, reject) => {
+//   resolve('done');
+// });
+
+// Promise.resolve('done').then();
+
+// new Promise((resolve, reject) => {
+//   reject('error');
+// });
+
+// Promise.reject('error').catch();
+
+// const makeGreeting = (guestName, onSuccess, onError) => {
+//   if (guestName === '' || guestName === undefined) {
+//     return onError('Guest name must not be empty');
+//   }
+//   onSuccess(`Welcome ${guestName}`);
+// };
+
+// makeGreeting(
+//   'Mango',
+//   greeting => console.log(greeting),
+//   error => console.error(error)
+// );
+
+// const makeGreeting = guestName => {
+//   if (guestName === '' || guestName === undefined) {
+//     return Promise.reject('Guest name must not be empty');
+//   }
+
+//   Promise.resolve(`Welcome ${guestName}`);
+// };
+
+// makeGreeting('Mango')
+//   .then(greeting => console.log(greeting))
+//   .catch(error => console.error(error));
+
+const makePromise = (text, delay) => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(text), delay);
+  });
+};
+
+const promiseA = makePromise('promiseA value', 1000);
+const promiseB = makePromise('promiseB value', 3000);
+
+Promise.race([promiseA, promiseB])
+  .then(value => console.log(value)) // "promiseA value"
+  .catch(error => console.log(error));
