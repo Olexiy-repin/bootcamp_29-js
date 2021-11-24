@@ -5,37 +5,45 @@
 
 const BASE_URL = 'http://localhost:3000';
 
-const newUser = {
-  name: 'Nina Reyes',
-  username: 'Reyes',
-  email: 'test@april.biz',
+const addNewUser = newUser => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newUser),
+  };
+
+  return fetch(`${BASE_URL}/users`, options).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+
+    return response.json();
+  });
+};
+
+addNewUser({
+  name: 'Gregory Clayton',
+  username: 'sdfsdf',
+  email: 'on@me.nr',
   address: {
-    street: 'Kulas Light',
-    suite: 'Apt. 556',
-    city: 'Gwenborough',
-    zipcode: '92998-3874',
+    street: 'Dayna Park',
+    suite: 'Suite 449',
+    city: 'Bartholomebury',
+    zipcode: '76495-3109',
     geo: {
-      lat: '-37.3159',
-      lng: '81.1496',
+      lat: '24.6463',
+      lng: '-168.8889',
     },
   },
-  phone: '1-770-736-8031 x56442',
-  website: 'hildegard.org',
+  phone: '(775)976-6794 x41206',
+  website: 'conrad.com',
   company: {
-    name: 'Romaguera-Crona',
-    catchPhrase: 'Multi-layered client-server neural-net',
-    bs: 'harness real-time e-markets',
+    name: 'Yost and Sons',
+    catchPhrase: 'Switchable contextually-based project',
+    bs: 'aggregate real-time technologies',
   },
-};
-
-const options = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(newUser),
-};
-
-fetch(`${BASE_URL}/users`, options)
-  .then(r => r.json())
-  .then(console.log);
+}).then(data => {
+  console.log(data);
+});

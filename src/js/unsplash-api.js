@@ -1,4 +1,5 @@
 'use strict';
+import axios from 'axios';
 
 const API_KEY = 'LxvKVGJqiSe6NcEVZOaLXC-f2JIIWZaq_o0WrF8mwJc';
 const BASE_URL = 'https://api.unsplash.com';
@@ -6,13 +7,13 @@ const BASE_URL = 'https://api.unsplash.com';
 export const fetchImages = query => {
   let page = Number(localStorage.getItem('page'));
 
-  return fetch(
-    `${BASE_URL}/search/photos?client_id=${API_KEY}&query=${query}&page=${page}&per_page=10`,
-  ).then(response => {
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-
-    return response.json();
+  return axios.get(`${BASE_URL}/search/photos`, {
+    params: {
+      client_id: API_KEY,
+      query,
+      page,
+      per_page: 10,
+      order_by: 'latest',
+    },
   });
 };

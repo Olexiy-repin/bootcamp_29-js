@@ -3,20 +3,26 @@
  * Method(PUT/PATCH). Headers ("Content-Type": "application/json"). Body.
  */
 
-// const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:3000';
 
-// const commentToUpdate = {
-//   name: 'Fannie Park',
-// };
+const updateUser = (newInfo, id) => {
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newInfo),
+  };
 
-// const options = {
-//   method: 'PUT',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(commentToUpdate),
-// };
+  return fetch(`${BASE_URL}/users/${id}`, options).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
 
-// fetch(`${BASE_URL}/users/11`, options)
-//   .then(r => r.json())
-//   .then(console.log);
+    return response.json();
+  });
+};
+
+updateUser({ email: 'test@gmail.com' }, 4);
+updateUser({ email: 'test@gmail.com' }, 5);
+updateUser({ email: 'test@gmail.com' }, 6);

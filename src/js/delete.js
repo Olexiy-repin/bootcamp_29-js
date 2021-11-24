@@ -5,8 +5,24 @@
 
 const BASE_URL = 'http://localhost:3000';
 
-fetch(`${BASE_URL}/users/11`, {
-  method: 'DELETE',
-})
-  .then(r => r.json())
-  .then(console.log);
+const deleteUser = id => {
+  const options = {
+    method: 'DELETE',
+  };
+
+  return fetch(`${BASE_URL}/users/${id}`, options).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+
+    return response.json();
+  });
+};
+
+deleteUser(11)
+  .then(data => {
+    console.log(data);
+  })
+  .catch(err => {
+    console.log(err);
+  });

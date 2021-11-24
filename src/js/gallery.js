@@ -32,7 +32,7 @@ const onFormSubmit = event => {
   clearGallery();
 
   fetchImages(query)
-    .then(data => {
+    .then(({ data }) => {
       galleryEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data));
       increasePageInLocalStorage();
       showLoadMoreBtn();
@@ -46,7 +46,7 @@ const onLoadMoreBtnClick = () => {
   const query = localStorage.getItem('query');
 
   fetchImages(query)
-    .then(data => {
+    .then(({ data }) => {
       galleryEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data));
       increasePageInLocalStorage();
     })

@@ -3,34 +3,22 @@
  * Method (GET).
  */
 
-// const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:3000';
 
-// fetch(`${BASE_URL}/posts`)
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error(response.status);
-//     }
+const fetchUsers = id => {
+  return fetch(`${BASE_URL}/users/${id}`).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
 
-//     return response.json();
-//   })
-//   .then(data => {
-//     console.log(data);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
+    return response.json();
+  });
+};
 
-// fetch(`${BASE_URL}/comments?_sort=name&_order=asc`)
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error(response.status);
-//     }
-
-//     return response.json();
-//   })
-//   .then(data => {
-//     console.log(data);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
+fetchUsers(5)
+  .then(data => {
+    console.log(data);
+  })
+  .catch(err => {
+    console.log(err);
+  });
